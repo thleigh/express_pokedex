@@ -8,15 +8,23 @@ const { response } = require('express');
 // GET /pokemon - return a page with favorited Pokemon
 router.get('/', (req, res) => { 
 
-  let favPoke = db.pokemon.findAll()
+  let favPokemon = db.pokemon.findAll()
+
   // TODO: Get all records from the DB and render to view
-  res.send('Render a page of favorites here');
+  res.render('favorites', {pokemon: favPokemon})
+  .catch(err => {
+    console.log('Error:', err)
+  });
 });
 
 // POST /pokemon - receive the name of a pokemon and add it to the database
 router.post('/', (req, res) => {
+  db.pokemon.findOrCreate ({
+    where: {name: req.body.name}
+  })
   // TODO: Get form data and add a new record to DB
-  res.send(req.body);
-});
+  res.redirect('/pokemon');
+  })
+
 
 module.exports = router;
