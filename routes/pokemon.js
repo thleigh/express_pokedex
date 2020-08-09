@@ -8,22 +8,24 @@ const { response } = require('express');
 // GET /pokemon - return a page with favorited Pokemon
 router.get('/', (req, res) => { 
 
-  let favPokemon = db.pokemon.findAll()
+  let favPokemon =  db.pokemon.findAll()
+  .then((fav) => {
 
   // TODO: Get all records from the DB and render to view
-  res.render('favorites', {pokemon: favPokemon})
-  .catch(err => {
-    console.log('Error:', err)
-  });
+  res.render('favorites', {pokemon: fav})
+  })
+
 });
 
 // POST /pokemon - receive the name of a pokemon and add it to the database
-router.post('/', (req, res) => {
-  db.pokemon.findOrCreate ({
+router.post('/', async (req, res) => {
+  await db.pokemon.findOrCreate ({
     where: {name: req.body.name}
   })
+  .then((response) => { 
+    res.redirect('/pokemon');
+  })
   // TODO: Get form data and add a new record to DB
-  res.redirect('/pokemon');
   })
 
 
