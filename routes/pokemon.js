@@ -5,6 +5,8 @@ var db = require('../models');
 const { parse } = require('dotenv');
 const { response } = require('express');
 
+
+
 // GET /pokemon - return a page with favorited Pokemon
 router.get('/', (req, res) => { 
 
@@ -18,15 +20,23 @@ router.get('/', (req, res) => {
 });
 
 // POST /pokemon - receive the name of a pokemon and add it to the database
-router.post('/', async (req, res) => {
-  await db.pokemon.findOrCreate ({
+router.post('/', (req, res) => {
+  db.pokemon.findOrCreate ({
     where: {name: req.body.name}
   })
-  .then((response) => { 
+  .then(function() { 
     res.redirect('/pokemon');
   })
   // TODO: Get form data and add a new record to DB
   })
 
+router.delete('/',  (req, res) => {
+  db.pokemon.destroy({
+    where: {name: req.body.name}
+    })
+    .then(function() {
+      res.redirect('/pokemon');
+    })
+})
 
 module.exports = router;

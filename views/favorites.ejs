@@ -4,4 +4,8 @@
             <%= fav.name %>
         </h2>
     </div>
+    <form method="POST" action="/pokemon?_method=DELETE">
+        <input hidden type="text" name="name" value="<%=fav.name%>">
+        <button type="submit">Remove</button>        
+    </form>
 <% }) %> 
