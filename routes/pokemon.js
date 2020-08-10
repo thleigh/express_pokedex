@@ -29,8 +29,7 @@ router.post('/', (req, res) => {
   .then(function() { 
     res.redirect('/pokemon');
   })
-  // TODO: Get form data and add a new record to DB
-  })
+})
 
 router.delete('/',  (req, res) => {
   db.pokemon.destroy({
