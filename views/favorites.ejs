@@ -1,7 +1,7 @@
 <% pokemon.forEach( fav => { %>
     <div>
         <h2>
-            <%= fav.name %>
+            <a href="/pokemon/<%=fav.name%>"><%= fav.name %></a>
         </h2>
     </div>
     <form method="POST" action="/pokemon?_method=DELETE">

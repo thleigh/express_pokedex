@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 // Make sure to require your models in the files where they will be used.
 var db = require('../models');
+let axios = require('axios');
+
 const { parse } = require('dotenv');
 const { response } = require('express');
 
@@ -37,6 +39,16 @@ router.delete('/',  (req, res) => {
     .then(function() {
       res.redirect('/pokemon');
     })
+})
+
+router.get('/:name', (req, res) => {
+  if(req.params.name) {
+    axios.get(`http://pokeapi.co/api/v2/pokemon/${req.params.name.toLowerCase()}`)
+    .then(response => {
+      let pokemonData = response.data;
+      res.render('show', {pokemon: pokemonData})
+    })
+  }
 })
 
 module.exports = router;

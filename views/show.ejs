@@ -1,0 +1,18 @@
+
+<img src="<%= pokemon.sprites.front_default %>" alt="<%=pokemon.name%>" width="300px">
+
+<h1><%= pokemon.name %> </h1>
+
+<h5>Types: </h5>
+<ul>
+    <% for(let i=0; i<pokemon.types.length; i++) { %>
+        <li><%= pokemon.types[i].type.name %></li>
+    <% } %> 
+</ul>
+
+<h5>Moves: </h5>
+<ul>
+    <% for(let i=0; i<pokemon.moves.length; i++) { %>
+        <li><%= pokemon.moves[i].move.name %></li>
+    <% } %> 
+</ul>
